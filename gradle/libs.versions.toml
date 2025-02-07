@@ -10,6 +10,9 @@ constraintlayout = "2.2.0"
 rxandroid_version="3.0.2"
 rxjava_version="3.1.8"
 glide_version="4.16.0"
+retrofit_version="2.11.0"
+gson_version="2.11.0"
+adapterRxjava3_version="2.11.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -22,6 +25,9 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 rxandroid = {group = "io.reactivex.rxjava3", name = "rxandroid", version.ref ="rxandroid_version"}
 rxjava = {group = "io.reactivex.rxjava3", name = "rxjava", version.ref ="rxjava_version"}
 glide = {group = "com.github.bumptech.glide", name = "glide", version.ref ="glide_version"}
+retrofit = {group = "com.squareup.retrofit2", name = "retrofit", version.ref ="retrofit_version"}
+gson = {group = "com.squareup.retrofit2", name = "converter-gson", version.ref ="gson_version"}
+adapterRxjava3 = {group = "com.squareup.retrofit2", name = "adapter-rxjava3", version.ref ="adapterRxjava3_version"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

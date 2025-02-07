@@ -40,14 +40,14 @@ public class MainViewModel extends AndroidViewModel {
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private MutableLiveData<Boolean> isError = new MutableLiveData<>();
 
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }
     public LiveData<Boolean> getIsError() {
         return isError;
     }
-
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public MutableLiveData<DogImage> getDogImage() {
         return dogImage;
@@ -99,36 +99,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     private Single<DogImage> loadDogImageRX(){
-        return Single.fromCallable(new Callable<DogImage>() {
-            @Override
-            public DogImage call() throws Exception {
-
-                //создание адреса по которому будет отправлятся запрос
-                URL url = new URL(BASE_URL);
-                //открываем содинение, сохроняя его в urlConnection
-                HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
-                //создание потока ввода для считывания данных из интернета
-                InputStream inputStream = urlConnection.getInputStream();
-                //сичитывание символов по байтового
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                //считывание целой строки
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                StringBuilder data = new StringBuilder();
-                String result;
-                do {
-                    result = bufferedReader.readLine();
-                    if (result != null){
-                        data.append(result);
-                    }
-                } while (result != null);
-
-                JSONObject jsonObject = new JSONObject(data.toString());
-                String message = jsonObject.getString(KEY_MESSAGE);
-                String status = jsonObject.getString(KEY_STATUS);
-                return new DogImage(message, status);
-            }
-        });
+        return ApiFactory.getApiService().loadDogImage();
     }
 
     @Override
